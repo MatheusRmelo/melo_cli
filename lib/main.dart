@@ -16,10 +16,36 @@ void main(List<String> arguments) {
   int value = int.parse(option!);
   String examplePath = '${Directory.current.path}\\lib\\example\\';
   String appPath = "${Directory.current.path}\\app\\";
+  String pluralName = "";
+  String singularName;
   switch (value) {
     case 1:
-      CliCommons().create(appPath, examplePath: examplePath);
-      CliModule().createModule(appPath);
+      print('What should we name your module?');
+      final input = stdin.readLineSync();
+      if (input == null) {
+        print('Your must give a name to module!');
+        return;
+      }
+      pluralName = input;
+      print('What is singular name from module?');
+      final input2 = stdin.readLineSync();
+      if (input2 == null) {
+        print('Your must give a singular name to module!');
+        return;
+      }
+      singularName = input2;
+      CliCommons(
+              appPath: appPath,
+              examplePath: examplePath,
+              pluralName: pluralName,
+              singularName: singularName)
+          .create();
+      CliModule(
+              appPath: appPath,
+              examplePath: examplePath,
+              name: pluralName,
+              singularName: singularName)
+          .create();
       break;
     case 2:
       print('cubit');
