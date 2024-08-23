@@ -38,6 +38,15 @@ class CliCommons {
         '$examplePath\\commons\\widgets\\meloui_delete_dialog.dart',
         pluralName: pluralName,
         singularName: singularName);
+
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\meloui_text_field.dart',
+        '$examplePath\\commons\\widgets\\meloui_text_field.dart',
+        pluralName: pluralName,
+        singularName: singularName);
+    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_snackbar.dart',
+        '$examplePath\\commons\\widgets\\meloui_snackbar.dart',
+        pluralName: pluralName, singularName: singularName);
   }
 
   Future<void> _createModels(String path) async {

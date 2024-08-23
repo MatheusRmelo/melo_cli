@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melo_ui/melo_ui.dart';
 import '../../../../commons/injection/injection_container.dart';
+import '../../../../commons/widgets/meloui_button.dart';
+import '../../../../commons/widgets/meloui_snackbar.dart';
+import '../../../../commons/widgets/meloui_text.dart';
+import '../../../../commons/widgets/meloui_text_field.dart';
 import '../../domain/models/user_model.dart';
 import '../manager/users_form/users_form_cubit.dart';
 
@@ -38,7 +41,7 @@ class _UsersFormPageState extends State<UsersFormPage> {
             }
           }
           if (state is UsersFormError) {
-            ScaffoldMessenger.of(context).showSnackBar(MeloUIErrorSnackbar(
+            ScaffoldMessenger.of(context).showSnackBar(MeloUiSuccessSnackbar(
                 context: context, content: Text(state.message)));
           }
           if (state is UsersFormDetailSuccess) {
@@ -49,7 +52,7 @@ class _UsersFormPageState extends State<UsersFormPage> {
           if (state is UsersFormLoading) {
             return Scaffold(
                 appBar: AppBar(
-                  title: MeloUIText(
+                  title: MeloUiText(
                       '${widget.id != null ? 'Editar' : 'Cadastrar'} lista de compra'),
                   centerTitle: true,
                 ),
@@ -59,7 +62,7 @@ class _UsersFormPageState extends State<UsersFormPage> {
           }
           return Scaffold(
             appBar: AppBar(
-              title: MeloUIText(
+              title: MeloUiText(
                   '${widget.id != null ? 'Editar' : 'Cadastrar'} lista de compra'),
               centerTitle: true,
             ),
@@ -68,7 +71,7 @@ class _UsersFormPageState extends State<UsersFormPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const MeloUIText(
+                    const MeloUiText(
                       'Selecione o dia (Opcional)',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -76,12 +79,12 @@ class _UsersFormPageState extends State<UsersFormPage> {
                     const SizedBox(
                       height: 8,
                     ),
-                    MeloUITextField(
+                    MeloUiTextField(
                       label: 'Nome',
                       placeholder: 'Digite o nome do orçamento',
                       controller: _nameController,
                     ),
-                    MeloUIButton(
+                    MeloUiButton(
                         title:
                             '${widget.id != null ? 'Editar' : 'Criar'} lista',
                         isLoading: (state is UsersFormBusy),
