@@ -19,7 +19,25 @@ class CliCommons {
     Directory('$appPath\\commons').create(recursive: true).then((value) async {
       await _createModels(value.path);
       await _createInjection(value.path);
+      await _createWidgets(value.path);
     });
+  }
+
+  Future<void> _createWidgets(String path) async {
+    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_text.dart',
+        '$examplePath\\commons\\widgets\\meloui_text.dart',
+        pluralName: pluralName, singularName: singularName);
+    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_button.dart',
+        '$examplePath\\commons\\widgets\\meloui_button.dart',
+        pluralName: pluralName, singularName: singularName);
+    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_card.dart',
+        '$examplePath\\commons\\widgets\\meloui_card.dart',
+        pluralName: pluralName, singularName: singularName);
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\meloui_delete_dialog.dart',
+        '$examplePath\\commons\\widgets\\meloui_delete_dialog.dart',
+        pluralName: pluralName,
+        singularName: singularName);
   }
 
   Future<void> _createModels(String path) async {

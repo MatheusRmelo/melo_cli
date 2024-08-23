@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melo_ui/melo_ui.dart';
 
 import '../../../../commons/injection/injection_container.dart';
 import '../manager/users/users_cubit.dart';
 import '../widgets/card_tile.dart';
+import '../../../../commons/widgets/meloui_button.dart';
+import '../../../../commons/widgets/meloui_text.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({super.key});
@@ -29,7 +30,7 @@ class _UsersPageState extends State<UsersPage> {
         builder: (context, state) {
           return Scaffold(
             appBar: AppBar(
-              title: const MeloUIText('Minhas listas de compras'),
+              title: const MeloUiText('Minhas listas de compras'),
               actions: [
                 IconButton.filled(
                   onPressed: () {},
@@ -49,7 +50,7 @@ class _UsersPageState extends State<UsersPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      MeloUIText(
+                      MeloUiText(
                         'Falha: ${state.message}',
                         color: Colors.red,
                         style: const TextStyle(fontSize: 24),
@@ -57,7 +58,7 @@ class _UsersPageState extends State<UsersPage> {
                       const SizedBox(
                         height: 24,
                       ),
-                      MeloUIButton(
+                      MeloUiButton(
                           width: 200, title: 'Recarregar', onPressed: () {})
                     ],
                   ),

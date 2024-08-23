@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:melo_ui/melo_ui.dart';
+
+import '../../../../commons/widgets/meloui_card.dart';
+import '../../../../commons/widgets/meloui_delete_dialog.dart';
+import '../../../../commons/widgets/meloui_text.dart';
 
 class CardTile extends StatelessWidget {
   const CardTile(
@@ -18,7 +21,7 @@ class CardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: MeloUICard(
+      child: MeloUiCard(
           width: double.infinity,
           height: 160,
           padding: const EdgeInsets.all(16),
@@ -31,11 +34,11 @@ class CardTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MeloUIText(
+                      MeloUiText(
                         title,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      MeloUIText(
+                      MeloUiText(
                         description,
                         style: const TextStyle(),
                       ),
@@ -49,7 +52,7 @@ class CardTile extends StatelessWidget {
                       } else if (item == 2) {
                         showDialog(
                           context: context,
-                          builder: (context) => MeloUIDeleteDialogWidget(
+                          builder: (context) => MeloUiDeleteDialogWidget(
                             title: 'Excluir lista de compra',
                             question:
                                 'Ao excluir essa lista é uma ação irreversível',
@@ -72,7 +75,7 @@ class CardTile extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            MeloUIText('Editar'),
+                            MeloUiText('Editar'),
                           ],
                         ),
                       ),
@@ -84,7 +87,7 @@ class CardTile extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            MeloUIText('Excluir'),
+                            MeloUiText('Excluir'),
                           ],
                         ),
                       ),
