@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:melo_cli/cli_commons.dart';
 import 'package:melo_cli/cli_module.dart';
+import 'package:melo_cli/current_path_utils.dart';
 
 void main(List<String> arguments) {
   print('What I can do for you?');
@@ -13,9 +14,15 @@ void main(List<String> arguments) {
     print('Invalid Option!');
     return;
   }
+
+  String? currentPath = CurrentPathUtils.getCurrentPath();
+  if (currentPath == null) {
+    print('Not possible find melo_cli package files');
+    return;
+  }
   int value = int.parse(option!);
-  String examplePath = '${Directory.current.path}\\lib\\example\\';
-  String appPath = "${Directory.current.path}\\app\\";
+  String examplePath = '$currentPath\\lib\\example\\';
+  String appPath = "${Directory.current.path}\\lib\\features\\";
   String pluralName = "";
   String singularName;
   switch (value) {
