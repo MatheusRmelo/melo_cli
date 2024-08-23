@@ -1,5 +1,5 @@
 name: melo_cli
-description: "A new Flutter package project."
+description: Implements a CLI Builder to use Clean Architecture in Dart from Melo Technology.
 version: 0.0.1
 homepage: https://www.melotechnology.com.br
 repository: https://github.com/MatheusRmelo/melo_cli
