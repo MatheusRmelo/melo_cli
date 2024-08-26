@@ -41,7 +41,7 @@ class _UsersFormPageState extends State<UsersFormPage> {
             }
           }
           if (state is UsersFormError) {
-            ScaffoldMessenger.of(context).showSnackBar(MeloUiSuccessSnackbar(
+            ScaffoldMessenger.of(context).showSnackBar(MeloUiErrorSnackbar(
                 context: context, content: Text(state.message)));
           }
           if (state is UsersFormDetailSuccess) {

@@ -3,7 +3,7 @@ import '../models/user_model.dart';
 import '../repositories/i_users_repository.dart';
 
 class UpdateUserUsecase {
-  final IUsersListRepository repository;
+  final IUsersRepository repository;
   UpdateUserUsecase({required this.repository});
 
   Future<({Response response, bool? result})> call(

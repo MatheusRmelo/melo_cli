@@ -3,7 +3,7 @@ import '../../domain/models/user_model.dart';
 import '../../domain/repositories/i_users_repository.dart';
 import '../data_sources/users_remote_datasource.dart';
 
-class UsersRepository implements IUsersListRepository {
+class UsersRepository implements IUsersRepository {
   final IUsersRemoteDataSource remoteDataSource;
   UsersRepository({
     required this.remoteDataSource,

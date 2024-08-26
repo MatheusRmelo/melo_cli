@@ -16,34 +16,30 @@ class UsersInjectionContainer {
       () => UsersRemoteDataSource(),
     );
 
-    dependency.registerFactory<IUsersListRepository>(
+    dependency.registerFactory<IUsersRepository>(
       () => UsersRepository(
         remoteDataSource: dependency.get<IUsersRemoteDataSource>(),
       ),
     );
 
     dependency.registerFactory<ListUserUsecase>(
-      () => ListUserUsecase(repository: dependency.get<IUsersListRepository>()),
+      () => ListUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
     dependency.registerFactory<DeleteUserUsecase>(
-      () =>
-          DeleteUserUsecase(repository: dependency.get<IUsersListRepository>()),
+      () => DeleteUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
     dependency.registerFactory<DetailUserUsecase>(
-      () =>
-          DetailUserUsecase(repository: dependency.get<IUsersListRepository>()),
+      () => DetailUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
     dependency.registerFactory<UpdateUserUsecase>(
-      () =>
-          UpdateUserUsecase(repository: dependency.get<IUsersListRepository>()),
+      () => UpdateUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
     dependency.registerFactory<CreateUserUsecase>(
-      () =>
-          CreateUserUsecase(repository: dependency.get<IUsersListRepository>()),
+      () => CreateUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
     dependency.registerFactory<UsersCubit>(

@@ -12,11 +12,11 @@ abstract class IUsersRemoteDataSource {
 
 class UsersRemoteDataSource implements IUsersRemoteDataSource {
   final String _table = "users";
+  final _supabase = Supabase.instance.client;
 
   @override
   Future<ResponseModel<List<UserModel>>> findAll() async {
-    final supabase = Supabase.instance.client;
-    var response = await supabase.from(_table).select();
+    var response = await _supabase.from(_table).select();
 
     return ResponseModel(
         ok: true,
@@ -25,17 +25,15 @@ class UsersRemoteDataSource implements IUsersRemoteDataSource {
 
   @override
   Future<ResponseModel<UserModel>> findById(String id) async {
-    final supabase = Supabase.instance.client;
-    var response = await supabase.from(_table).select().eq('id', id);
+    var response = await _supabase.from(_table).select().eq('id', id);
 
     return ResponseModel(ok: true, result: UserModel.fromJson(response.first));
   }
 
   @override
   Future<ResponseModel<bool>> update(String id, UserModel body) async {
-    final supabase = Supabase.instance.client;
     try {
-      await supabase.from(_table).update(body.toJson()).eq('id', id);
+      await _supabase.from(_table).update(body.toJson()).eq('id', id);
       return ResponseModel(ok: true, result: true);
     } catch (err) {
       return ResponseModel(ok: false, result: false);
@@ -44,9 +42,9 @@ class UsersRemoteDataSource implements IUsersRemoteDataSource {
 
   @override
   Future<ResponseModel<UserModel>> create(UserModel body) async {
-    final supabase = Supabase.instance.client;
     try {
-      var response = await supabase.from(_table).insert(body.toJson()).select();
+      var response =
+          await _supabase.from(_table).insert(body.toJson()).select();
       return ResponseModel(
           ok: true, result: UserModel.fromJson(response.first));
     } catch (err) {
@@ -57,9 +55,8 @@ class UsersRemoteDataSource implements IUsersRemoteDataSource {
 
   @override
   Future<ResponseModel<bool>> delete(String id) async {
-    final supabase = Supabase.instance.client;
     try {
-      await supabase.from(_table).delete().eq('id', id);
+      await _supabase.from(_table).delete().eq('id', id);
       return ResponseModel(ok: true, result: true);
     } catch (err) {
       return ResponseModel(ok: false, result: false);

@@ -1,21 +1,22 @@
 import 'dart:io';
 
+import 'package:melo_cli/cli_auth.dart';
 import 'package:melo_cli/cli_commons.dart';
 import 'package:melo_cli/cli_module.dart';
 import 'package:melo_cli/current_path_utils.dart';
 
-void main(List<String> arguments) {
+void main(List<String> arguments) async {
   print('What I can do for you?');
   print('1 - Create a New Module');
-  print('2 - Create a New Cubit');
-  print('3 - Create a New UseCase');
+  print('2 - Create a Authentication Module');
+  print('3 - Create a Splash Module');
   final option = stdin.readLineSync();
   if (int.tryParse(option ?? '') == null) {
     print('Invalid Option!');
     return;
   }
 
-  String? currentPath = CurrentPathUtils.getCurrentPath();
+  String? currentPath = await CurrentPathUtils.getCurrentPath();
   if (currentPath == null) {
     print('Not possible find melo_cli package files');
     return;
@@ -42,11 +43,9 @@ void main(List<String> arguments) {
       }
       singularName = input2;
       CliCommons(
-              appPath: appPath,
-              examplePath: examplePath,
-              pluralName: pluralName,
-              singularName: singularName)
-          .create();
+        appPath: appPath,
+        examplePath: examplePath,
+      ).create();
       CliModule(
               appPath: appPath,
               examplePath: examplePath,
@@ -55,7 +54,14 @@ void main(List<String> arguments) {
           .create();
       break;
     case 2:
-      print('cubit');
+      CliCommons(
+        appPath: appPath,
+        examplePath: examplePath,
+      ).create();
+      CliAuth(
+        appPath: appPath,
+        examplePath: examplePath,
+      ).create();
       break;
     case 3:
       print('use_case');

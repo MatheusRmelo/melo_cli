@@ -3,7 +3,7 @@ import '../models/user_model.dart';
 import '../repositories/i_users_repository.dart';
 
 class ListUserUsecase {
-  final IUsersListRepository repository;
+  final IUsersRepository repository;
   ListUserUsecase({required this.repository});
 
   Future<({Response response, List<UserModel>? result})> call() async {

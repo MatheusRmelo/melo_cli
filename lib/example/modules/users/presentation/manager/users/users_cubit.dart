@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melo_cli/example/commons/models/response.dart';
 
+import '../../../../../commons/models/response.dart';
 import '../../../domain/models/user_model.dart';
 import '../../../domain/use_cases/delete_user_usecase.dart';
 import '../../../domain/use_cases/list_user_usecase.dart';
