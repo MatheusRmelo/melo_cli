@@ -26,13 +26,15 @@ class CliAuth {
   Future<void> _createData(String path) async {
     await CliHelper.copyFileFromExample(
         '$path\\data\\data_sources\\${name}_remote_datasource.dart',
-        '$examplePath\\modules\\users\\data\\data_sources\\users_remote_datasource.dart',
-        pluralName: name,
+        '$examplePath\\modules\\$name\\data\\data_sources\\${name}_remote_datasource.dart',
+        isToReplaceNameInScript: false,
+        pluralName: '',
         singularName: '');
     await CliHelper.copyFileFromExample(
         '$path\\data\\repositories\\${name}_repository.dart',
-        '$examplePath\\modules\\users\\data\\repositories\\users_repository.dart',
-        pluralName: name,
+        '$examplePath\\modules\\$name\\data\\repositories\\${name}_repository.dart',
+        isToReplaceNameInScript: false,
+        pluralName: '',
         singularName: '');
   }
 
@@ -40,17 +42,17 @@ class CliAuth {
     await CliHelper.copyFileFromExample(
         '$path\\domain\\repositories\\i_${name}_repository.dart',
         '$examplePath\\modules\\$name\\domain\\repositories\\i_${name}_repository.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
     await CliHelper.copyFileFromExample(
         '$path\\domain\\use_cases\\signin_usecase.dart',
         '$examplePath\\modules\\$name\\domain\\use_cases\\signin_usecase.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
     await CliHelper.copyFileFromExample(
         '$path\\domain\\use_cases\\signup_usecase.dart',
         '$examplePath\\modules\\$name\\domain\\use_cases\\signup_usecase.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
   }
 
@@ -58,31 +60,31 @@ class CliAuth {
     await CliHelper.copyFileFromExample(
         '$path\\injection_container\\${name}_injection_container.dart',
         '$examplePath\\modules\\$name\\injection_container\\${name}_injection_container.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
   }
 
   Future<void> _createPresentation(String path) async {
     await CliHelper.copyFileFromExample(
         '$path\\presentation\\pages\\signin_page.dart',
-        '$examplePath\\modules\\$name\\presentation\\pages\\sigin_page.dart',
-        pluralName: name,
+        '$examplePath\\modules\\$name\\presentation\\pages\\signin_page.dart',
+        pluralName: '',
         singularName: '');
     await CliHelper.copyFileFromExample(
         '$path\\presentation\\pages\\signup_page.dart',
         '$examplePath\\modules\\$name\\presentation\\pages\\signup_page.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
 
     await CliHelper.copyFileFromExample(
         '$path\\presentation\\manager\\$name\\${name}_cubit.dart',
         '$examplePath\\modules\\$name\\presentation\\manager\\$name\\${name}_cubit.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
     await CliHelper.copyFileFromExample(
         '$path\\presentation\\manager\\$name\\${name}_state.dart',
         '$examplePath\\modules\\$name\\presentation\\manager\\$name\\${name}_state.dart',
-        pluralName: name,
+        pluralName: '',
         singularName: '');
   }
 }

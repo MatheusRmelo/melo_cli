@@ -43,9 +43,11 @@ void main(List<String> arguments) async {
       }
       singularName = input2;
       CliCommons(
-        appPath: appPath,
-        examplePath: examplePath,
-      ).create();
+              appPath: appPath,
+              examplePath: examplePath,
+              pluralName: pluralName,
+              singularName: singularName)
+          .create();
       CliModule(
               appPath: appPath,
               examplePath: examplePath,
@@ -55,9 +57,11 @@ void main(List<String> arguments) async {
       break;
     case 2:
       CliCommons(
-        appPath: appPath,
-        examplePath: examplePath,
-      ).create();
+              appPath: appPath,
+              examplePath: examplePath,
+              pluralName: 'authentication',
+              singularName: 'authentication')
+          .create();
       CliAuth(
         appPath: appPath,
         examplePath: examplePath,

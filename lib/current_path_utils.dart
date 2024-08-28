@@ -8,7 +8,6 @@ class CurrentPathUtils {
     String baseDir = path.dirname(path.dirname(scriptPath));
     String packageConfigPath =
         path.join(baseDir, '.dart_tool', 'package_config.json');
-
     if (packageConfigPath.startsWith('/')) {
       packageConfigPath = packageConfigPath.substring(1);
     }

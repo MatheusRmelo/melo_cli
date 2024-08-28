@@ -20,12 +20,12 @@ class AuthenticationInjectionContainer {
 
     dependency.registerFactory<SignInUsecase>(
       () =>
-          SignInUsecase(repository: dependency.get<AuthenticationRepository>()),
+          SignInUsecase(repository: dependency.get<IAuthenticationRepository>()),
     );
 
     dependency.registerFactory<SignUpUsecase>(
       () =>
-          SignUpUsecase(repository: dependency.get<AuthenticationRepository>()),
+          SignUpUsecase(repository: dependency.get<IAuthenticationRepository>()),
     );
 
     dependency.registerFactory<AuthenticationCubit>(
