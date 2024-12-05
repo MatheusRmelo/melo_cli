@@ -20,7 +20,7 @@ class SignUpUsecase {
     if (errors.isNotEmpty) {
       return (error: null, errorsFields: errors);
     }
-    var result = await repository.signIn(email, password);
+    var result = await repository.signUp(email, password);
     if (result.response is Success) {
       return (error: null, errorsFields: null);
     } else if (result.response is ErrorResponse) {

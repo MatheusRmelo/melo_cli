@@ -1,0 +1,1 @@
+enum DatasourceType { supabase, restApi }

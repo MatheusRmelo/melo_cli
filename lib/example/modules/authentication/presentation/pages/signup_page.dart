@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../commons/extensions/context_extension.dart';
+import '../../../../commons/widgets/meloui_card.dart';
 import '../../../../commons/widgets/meloui_snackbar.dart';
 import '../../../../commons/widgets/meloui_text_field.dart';
 
@@ -31,6 +33,9 @@ class _SignUpPageState extends State<SignUpPage> {
             ScaffoldMessenger.of(context).showSnackBar(MeloUiErrorSnackbar(
                 context: context, content: Text(state.message)));
           }
+          if (state is AuthenticationSuccess) {
+            Navigator.pushReplacementNamed(context, '/');
+          }
         },
         builder: (context, state) {
           return Scaffold(
@@ -38,85 +43,103 @@ class _SignUpPageState extends State<SignUpPage> {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
               child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const MeloUiText(
-                        "Crie sua conta no StoreList!",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                child: Row(
+                  children: [
+                    if (context.isDesktop)
+                      const Spacer(
+                        flex: 1,
                       ),
-                      const MeloUiText(
-                        "E faça sua lista de compras",
-                        style: TextStyle(fontSize: 20),
+                    Expanded(
+                      child: MeloUiCard(
+                        padding: EdgeInsets.all(context.isMobile ? 16 : 32),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const MeloUiText(
+                                "Crie sua conta no StoreList!",
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              const MeloUiText(
+                                "E faça sua lista de compras",
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              MeloUiTextField(
+                                margin: EdgeInsets.zero,
+                                label: 'Nome',
+                                prefixIcon: const Icon(Icons.person),
+                                placeholder: 'Digite o seu nome',
+                                controller: _nameController,
+                                error: state is AuthenticationErrorField
+                                    ? state.errors.getErrorWithCode('name')
+                                    : null,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              MeloUiTextField(
+                                margin: EdgeInsets.zero,
+                                label: 'E-mail',
+                                prefixIcon: const Icon(Icons.email),
+                                placeholder: 'Digite o seu e-mail',
+                                controller: _emailController,
+                                capitalization: TextCapitalization.none,
+                                error: state is AuthenticationErrorField
+                                    ? state.errors.getErrorWithCode('email')
+                                    : null,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              MeloUiTextField(
+                                margin: EdgeInsets.zero,
+                                prefixIcon: const Icon(Icons.lock),
+                                isPassword: true,
+                                label: 'Senha',
+                                placeholder: "Digite a sua senha",
+                                controller: _passwordController,
+                                capitalization: TextCapitalization.none,
+                                error: state is AuthenticationErrorField
+                                    ? state.errors.getErrorWithCode('password')
+                                    : null,
+                              ),
+                              MeloUiButton(
+                                margin: const EdgeInsets.only(top: 32),
+                                title: 'Criar conta',
+                                onPressed: () => _bloc.handleClickSignUp(
+                                    email: _emailController.text,
+                                    password: _passwordController.text),
+                                isLoading: state is AuthenticationLoading,
+                              ),
+                              Container(
+                                width: double.infinity,
+                                margin: const EdgeInsets.only(top: 8),
+                                child: TextButton(
+                                    onPressed: () {
+                                      if (Navigator.canPop(context)) {
+                                        Navigator.pop(context);
+                                      } else {
+                                        Navigator.pushNamed(context, '/signUp');
+                                      }
+                                    },
+                                    child: const Text(
+                                      "Já tem conta? Entre agora!",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              )
+                            ]),
                       ),
-                      const SizedBox(
-                        height: 16,
+                    ),
+                    if (context.isDesktop)
+                      const Spacer(
+                        flex: 1,
                       ),
-                      MeloUiTextField(
-                        margin: EdgeInsets.zero,
-                        label: 'Nome',
-                        prefixIcon: const Icon(Icons.person),
-                        placeholder: 'Digite o seu nome',
-                        controller: _nameController,
-                        error: state is AuthenticationErrorField
-                            ? state.errors.getErrorWithCode('name')
-                            : null,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      MeloUiTextField(
-                        margin: EdgeInsets.zero,
-                        label: 'E-mail',
-                        prefixIcon: const Icon(Icons.email),
-                        placeholder: 'Digite o seu e-mail',
-                        controller: _emailController,
-                        capitalization: TextCapitalization.none,
-                        error: state is AuthenticationErrorField
-                            ? state.errors.getErrorWithCode('email')
-                            : null,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      MeloUiTextField(
-                        margin: EdgeInsets.zero,
-                        prefixIcon: const Icon(Icons.lock),
-                        isPassword: true,
-                        label: 'Senha',
-                        placeholder: "Digite a sua senha",
-                        controller: _passwordController,
-                        capitalization: TextCapitalization.none,
-                        error: state is AuthenticationErrorField
-                            ? state.errors.getErrorWithCode('password')
-                            : null,
-                      ),
-                      MeloUiButton(
-                        margin: const EdgeInsets.only(top: 32),
-                        title: 'Criar conta',
-                        onPressed: () => _bloc.handleClickSignUp(
-                            email: _emailController.text,
-                            password: _passwordController.text),
-                        isLoading: state is AuthenticationLoading,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.only(top: 8),
-                        child: TextButton(
-                            onPressed: () {
-                              if (Navigator.canPop(context)) {
-                                Navigator.pop(context);
-                              } else {
-                                Navigator.pushNamed(context, '/signUp');
-                              }
-                            },
-                            child: const Text(
-                              "Já tem conta? Entre agora!",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )),
-                      )
-                    ]),
+                  ],
+                ),
               ),
             ),
           );

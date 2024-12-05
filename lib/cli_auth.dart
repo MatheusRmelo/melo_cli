@@ -1,15 +1,18 @@
 import 'dart:io';
 
 import 'package:melo_cli/cli_helper.dart';
+import 'package:melo_cli/enums/datasource_type.dart';
 
 class CliAuth {
   String examplePath;
   String appPath;
   String name = 'authentication';
+  DatasourceType datasourceType;
 
   CliAuth({
     required this.appPath,
     required this.examplePath,
+    required this.datasourceType,
   });
 
   Future<void> create() async {
@@ -26,7 +29,7 @@ class CliAuth {
   Future<void> _createData(String path) async {
     await CliHelper.copyFileFromExample(
         '$path\\data\\data_sources\\${name}_remote_datasource.dart',
-        '$examplePath\\modules\\$name\\data\\data_sources\\${name}_remote_datasource.dart',
+        '$examplePath\\modules\\$name\\data\\data_sources\\${datasourceType == DatasourceType.restApi ? 'api_$name' : name}_remote_datasource.dart',
         isToReplaceNameInScript: false,
         pluralName: '',
         singularName: '');

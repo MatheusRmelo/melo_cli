@@ -1,12 +1,13 @@
 name: melo_cli
 description: Implements a CLI Builder to use Clean Architecture in Dart from Melo Technology.
-version: 0.1.18
+version: 0.2.20
 homepage: https://www.melotechnology.com.br
 repository: https://github.com/MatheusRmelo/melo_cli
 issue_tracker: https://github.com/MatheusRmelo/melo_cli/issues
 
 executables:
   melo_cli: main
+  melo_cli_local: main_local
 
 environment:
   sdk: '>=3.3.4 <4.0.0'
@@ -19,8 +20,10 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   get_it: ^7.7.0
+  http: ^1.2.2
   intl: ^0.19.0
   path: ^1.9.0
+  shared_preferences: ^2.3.3
   supabase_flutter: ^2.6.0
 
 dev_dependencies:
