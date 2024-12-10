@@ -15,8 +15,26 @@ class CliCore {
 
   Future<void> create() async {
     Directory('$appPath\\core').create(recursive: true).then((value) async {
+      await _createManager(value.path);
       await _createNetwork(value.path);
     });
+  }
+
+  Future<void> _createManager(String path) async {
+    String parentPath = "managers";
+    await CliHelper.copyFileFromExample(
+        '$path\\$parentPath\\manager_injection_container.dart',
+        '$examplePath\\core\\$parentPath\\manager_injection_container.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
+    await CliHelper.copyFileFromExample('$path\\$parentPath\\user_manager.dart',
+        '$examplePath\\core\\$parentPath\\user_manager.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
   }
 
   Future<void> _createNetwork(String path) async {

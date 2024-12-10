@@ -1,4 +1,4 @@
-import 'package:melo_cli/example/core/network/remote/api_client.dart';
+import '../../../../core/network/remote/api_client.dart';
 
 import '../../../../commons/models/response_model.dart';
 import '../../domain/models/user_model.dart';
@@ -21,7 +21,9 @@ class UsersRemoteDataSource implements IUsersRemoteDataSource {
 
     return ResponseModel(
         ok: true,
-        result: (response as List).map((e) => UserModel.fromJson(e)).toList());
+        result: (response.result as List)
+            .map((e) => UserModel.fromJson(e))
+            .toList());
   }
 
   @override

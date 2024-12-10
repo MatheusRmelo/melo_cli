@@ -14,6 +14,8 @@ void main(List<String> arguments) async {
   print('2 - Create a Authentication Module');
   print('3 - Create a Core Folder');
   print('4 - Create a Commons Folder');
+  print('5 - Create a Datasource');
+
   final option = stdin.readLineSync();
   if (int.tryParse(option ?? '') == null) {
     print('Invalid Option!');
@@ -64,7 +66,8 @@ void main(List<String> arguments) async {
               appPath: appPath,
               examplePath: examplePath,
               name: pluralName,
-              singularName: singularName)
+              singularName: singularName,
+              datasourceType: datasourceType)
           .create();
       break;
     case 2:
@@ -117,6 +120,7 @@ void main(List<String> arguments) async {
                   pluralName: '',
                   singularName: '')
               .create(injection: false);
+          break;
         case 2:
           CliCommons(
                   appPath: appPath,
@@ -128,8 +132,37 @@ void main(List<String> arguments) async {
                   extensions: false,
                   services: false,
                   widgets: false);
+          break;
       }
-
+      break;
+    case 5:
+      pluralName = Inputs.getModuleName();
+      if (pluralName == null) {
+        print('Your must give a name to module!');
+        return;
+      }
+      singularName = Inputs.getSingularModuleName();
+      if (singularName == null) {
+        print('Your must give a singular name to module!');
+        return;
+      }
+      datasourceType = Inputs.getDatasourceType();
+      if (datasourceType == null) {
+        print("Your must give a datasourceType");
+        return;
+      }
+      CliModule(
+              appPath: appPath,
+              examplePath: examplePath,
+              name: pluralName,
+              singularName: singularName,
+              datasourceType: datasourceType)
+          .create(
+              domain: false,
+              injection: false,
+              presentation: false,
+              repository: false);
+      break;
     default:
       print('Invalid Option!');
   }

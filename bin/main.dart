@@ -53,7 +53,8 @@ void main(List<String> arguments) async {
               appPath: appPath,
               examplePath: examplePath,
               name: pluralName,
-              singularName: singularName)
+              singularName: singularName,
+              datasourceType: DatasourceType.supabase)
           .create();
       break;
     case 2:

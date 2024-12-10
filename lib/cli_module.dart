@@ -1,41 +1,51 @@
 import 'dart:io';
 
 import 'package:melo_cli/cli_helper.dart';
+import 'package:melo_cli/enums/datasource_type.dart';
 
 class CliModule {
   String examplePath;
   String appPath;
   String name;
   String singularName;
+  DatasourceType datasourceType;
 
   CliModule(
       {required this.appPath,
       required this.examplePath,
       required this.name,
-      required this.singularName});
+      required this.singularName,
+      required this.datasourceType});
 
-  Future<void> create() async {
+  Future<void> create(
+      {bool datasource = true,
+      bool repository = true,
+      bool domain = true,
+      bool injection = true,
+      bool presentation = true}) async {
     Directory('$appPath\\modules\\$name')
         .create(recursive: true)
         .then((value) async {
-      await _createData(value.path);
-      await _createDomain(value.path);
-      await _createInjectionContainer(value.path);
-      await _createPresentation(value.path);
+      if (datasource) await _createData(value.path, repository: repository);
+      if (domain) await _createDomain(value.path);
+      if (injection) await _createInjectionContainer(value.path);
+      if (presentation) await _createPresentation(value.path);
     });
   }
 
-  Future<void> _createData(String path) async {
+  Future<void> _createData(String path, {bool repository = true}) async {
     await CliHelper.copyFileFromExample(
         '$path\\data\\data_sources\\${name}_remote_datasource.dart',
-        '$examplePath\\modules\\users\\data\\data_sources\\users_remote_datasource.dart',
+        '$examplePath\\modules\\users\\data\\data_sources\\${datasourceType == DatasourceType.restApi ? 'api_' : ''}users_remote_datasource.dart',
         pluralName: name,
         singularName: singularName);
-    await CliHelper.copyFileFromExample(
-        '$path\\data\\repositories\\${name}_repository.dart',
-        '$examplePath\\modules\\users\\data\\repositories\\users_repository.dart',
-        pluralName: name,
-        singularName: singularName);
+    if (repository) {
+      await CliHelper.copyFileFromExample(
+          '$path\\data\\repositories\\${name}_repository.dart',
+          '$examplePath\\modules\\users\\data\\repositories\\users_repository.dart',
+          pluralName: name,
+          singularName: singularName);
+    }
   }
 
   Future<void> _createDomain(String path) async {
