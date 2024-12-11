@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MeloUiErrorSnackbar extends SnackBar {
-  MeloUiErrorSnackbar({
+class ErrorSnackbar extends SnackBar {
+  ErrorSnackbar({
     super.key,
     required BuildContext context,
     required super.content,
@@ -15,8 +15,8 @@ class MeloUiErrorSnackbar extends SnackBar {
         );
 }
 
-class MeloUiSuccessSnackbar extends SnackBar {
-  MeloUiSuccessSnackbar({
+class SuccessSnackbar extends SnackBar {
+  SuccessSnackbar({
     super.key,
     required BuildContext context,
     required super.content,

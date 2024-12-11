@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../commons/widgets/meloui_card.dart';
-import '../../../../commons/widgets/meloui_delete_dialog.dart';
-import '../../../../commons/widgets/meloui_text.dart';
+import '../../../../commons/widgets/custom_card.dart';
+import '../../../../commons/widgets/dialogs/delete_dialog_widget.dart';
+import '../../../../commons/widgets/custom_text.dart';
 
 class CardTile extends StatelessWidget {
   const CardTile(
@@ -21,7 +21,7 @@ class CardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: MeloUiCard(
+      child: CustomCard(
           width: double.infinity,
           height: 160,
           padding: const EdgeInsets.all(16),
@@ -34,11 +34,11 @@ class CardTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MeloUiText(
+                      CustomText(
                         title,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      MeloUiText(
+                      CustomText(
                         description,
                         style: const TextStyle(),
                       ),
@@ -52,10 +52,9 @@ class CardTile extends StatelessWidget {
                       } else if (item == 2) {
                         showDialog(
                           context: context,
-                          builder: (context) => MeloUiDeleteDialogWidget(
-                            title: 'Excluir lista de compra',
-                            question:
-                                'Ao excluir essa lista é uma ação irreversível',
+                          builder: (context) => DeleteDialogWidget(
+                            title: 'Excluir',
+                            question: 'Ao excluir é uma ação irreversível',
                             onClose: () => Navigator.pop(context),
                             onDelete: () {
                               Navigator.pop(context);
@@ -75,7 +74,7 @@ class CardTile extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            MeloUiText('Editar'),
+                            CustomText('Editar'),
                           ],
                         ),
                       ),
@@ -87,7 +86,7 @@ class CardTile extends StatelessWidget {
                             SizedBox(
                               width: 8,
                             ),
-                            MeloUiText('Excluir'),
+                            CustomText('Excluir'),
                           ],
                         ),
                       ),

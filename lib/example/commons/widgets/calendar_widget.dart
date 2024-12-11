@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-import 'meloui_text.dart';
+import 'custom_text.dart';
 
-class MeloUiCalendarWidget extends StatefulWidget {
-  const MeloUiCalendarWidget(
+class CalendarWidget extends StatefulWidget {
+  const CalendarWidget(
       {super.key, required this.activeDate, required this.onChanged});
   final DateTime activeDate;
   final ValueChanged<DateTime?> onChanged;
   @override
-  State<MeloUiCalendarWidget> createState() => _MeloUiCalendarWidgetState();
+  State<CalendarWidget> createState() => _CalendarWidgetState();
 }
 
-class _MeloUiCalendarWidgetState extends State<MeloUiCalendarWidget> {
+class _CalendarWidgetState extends State<CalendarWidget> {
   final List<String> weekDays = [
     'Domingo',
     'Segunda',
@@ -74,7 +74,7 @@ class _MeloUiCalendarWidgetState extends State<MeloUiCalendarWidget> {
                 (index) => Expanded(
                       child: Container(
                         alignment: Alignment.center,
-                        child: MeloUiText(weekDays[index].substring(0, 3),
+                        child: CustomText(weekDays[index].substring(0, 3),
                             color: Colors.white),
                       ),
                     )),
@@ -106,7 +106,7 @@ class _MeloUiCalendarWidgetState extends State<MeloUiCalendarWidget> {
                             ? Colors.grey.withOpacity(0.5)
                             : Colors.transparent),
                 alignment: Alignment.center,
-                child: MeloUiText(
+                child: CustomText(
                   (_days[index].day).toString(),
                   color: _days[index].isDisabled
                       ? Colors.white.withOpacity(0.5)

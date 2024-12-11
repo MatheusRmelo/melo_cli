@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class MeloUiTextField extends StatefulWidget {
-  const MeloUiTextField(
+class CustomTextField extends StatefulWidget {
+  const CustomTextField(
       {super.key,
       required this.label,
       this.height = 48,
@@ -45,10 +45,10 @@ class MeloUiTextField extends StatefulWidget {
   final bool? isDense;
   final EdgeInsets? contentPadding;
   @override
-  State<MeloUiTextField> createState() => _MeloUiTextFieldState();
+  State<CustomTextField> createState() => _CustomTextFieldState();
 }
 
-class _MeloUiTextFieldState extends State<MeloUiTextField> {
+class _CustomTextFieldState extends State<CustomTextField> {
   bool _showPassword = false;
 
   @override

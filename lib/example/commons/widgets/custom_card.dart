@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MeloUiCard extends StatelessWidget {
-  const MeloUiCard(
+class CustomCard extends StatelessWidget {
+  const CustomCard(
       {super.key,
       required this.child,
       this.width = 600,

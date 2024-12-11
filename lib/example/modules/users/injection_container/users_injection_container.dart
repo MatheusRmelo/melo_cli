@@ -5,6 +5,7 @@ import '../domain/repositories/i_users_repository.dart';
 import '../domain/use_cases/create_user_usecase.dart';
 import '../domain/use_cases/delete_user_usecase.dart';
 import '../domain/use_cases/detail_user_usecase.dart';
+import '../domain/use_cases/list_user_dynamic_fields_usecase.dart';
 import '../domain/use_cases/list_user_usecase.dart';
 import '../domain/use_cases/update_user_usecase.dart';
 import '../presentation/manager/users/users_cubit.dart';
@@ -42,6 +43,10 @@ class UsersInjectionContainer {
       () => CreateUserUsecase(repository: dependency.get<IUsersRepository>()),
     );
 
+    dependency.registerFactory<ListUserDynamicFieldsUsecase>(
+      () => ListUserDynamicFieldsUsecase(),
+    );
+
     dependency.registerFactory<UsersCubit>(
       () => UsersCubit(
           deleteUserUsecase: dependency.get<DeleteUserUsecase>(),
@@ -50,10 +55,11 @@ class UsersInjectionContainer {
 
     dependency.registerFactory<UsersFormCubit>(
       () => UsersFormCubit(
-        detailUserUsecase: dependency.get<DetailUserUsecase>(),
-        updateUserUsecase: dependency.get<UpdateUserUsecase>(),
-        createUserUsecase: dependency.get<CreateUserUsecase>(),
-      ),
+          detailUserUsecase: dependency.get<DetailUserUsecase>(),
+          updateUserUsecase: dependency.get<UpdateUserUsecase>(),
+          createUserUsecase: dependency.get<CreateUserUsecase>(),
+          listCategoryDynamicFieldsUsecase:
+              dependency.get<ListUserDynamicFieldsUsecase>()),
     );
   }
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../commons/extensions/context_extension.dart';
-import '../../../../commons/widgets/meloui_card.dart';
-import '../../../../commons/widgets/meloui_snackbar.dart';
-import '../../../../commons/widgets/meloui_text_field.dart';
+import '../../../../commons/widgets/custom_card.dart';
+import '../../../../commons/widgets/custom_snackbar.dart';
+import '../../../../commons/widgets/custom_text_field.dart';
 
 import '../../../../commons/injection/injection_container.dart';
 import '../manager/authentication/authentication_cubit.dart';
-import '../../../../commons/widgets/meloui_button.dart';
-import '../../../../commons/widgets/meloui_text.dart';
+import '../../../../commons/widgets/custom_button.dart';
+import '../../../../commons/widgets/custom_text.dart';
 import '../../../../commons/extensions/error_field_extension.dart';
 
 class SignInPage extends StatefulWidget {
@@ -29,8 +29,8 @@ class _SignInPageState extends State<SignInPage> {
         bloc: _bloc,
         listener: (context, state) {
           if (state is AuthenticationError) {
-            ScaffoldMessenger.of(context).showSnackBar(MeloUiErrorSnackbar(
-                context: context, content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(
+                ErrorSnackbar(context: context, content: Text(state.message)));
           }
           if (state is AuthenticationSuccess) {
             Navigator.pushReplacementNamed(context, '/');
@@ -49,24 +49,24 @@ class _SignInPageState extends State<SignInPage> {
                         flex: 1,
                       ),
                     Expanded(
-                      child: MeloUiCard(
+                      child: CustomCard(
                         padding: EdgeInsets.all(context.isMobile ? 16 : 32),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const MeloUiText(
+                              const CustomText(
                                 "Bem vindo!",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              const MeloUiText(
+                              const CustomText(
                                 "Entre agora e aproveite",
                                 style: TextStyle(fontSize: 20),
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
-                              MeloUiTextField(
+                              CustomTextField(
                                 margin: EdgeInsets.zero,
                                 label: 'E-mail',
                                 prefixIcon: const Icon(Icons.email),
@@ -80,7 +80,7 @@ class _SignInPageState extends State<SignInPage> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              MeloUiTextField(
+                              CustomTextField(
                                 margin: EdgeInsets.zero,
                                 prefixIcon: const Icon(Icons.lock),
                                 isPassword: true,
@@ -104,7 +104,7 @@ class _SignInPageState extends State<SignInPage> {
                                       )),
                                 ],
                               ),
-                              MeloUiButton(
+                              CustomButton(
                                 margin: const EdgeInsets.only(top: 8),
                                 title: 'Entrar',
                                 onPressed: () => _bloc.handleClickSignIn(

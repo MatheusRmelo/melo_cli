@@ -80,6 +80,11 @@ class CliModule {
         pluralName: name,
         singularName: singularName);
     await CliHelper.copyFileFromExample(
+        '$path\\domain\\use_cases\\list_${singularName}_dynamic_fields_usecase.dart',
+        '$examplePath\\modules\\users\\domain\\use_cases\\list_user_dynamic_fields_usecase.dart',
+        pluralName: name,
+        singularName: singularName);
+    await CliHelper.copyFileFromExample(
         '$path\\domain\\use_cases\\delete_${singularName}_usecase.dart',
         '$examplePath\\modules\\users\\domain\\use_cases\\delete_user_usecase.dart',
         pluralName: name,

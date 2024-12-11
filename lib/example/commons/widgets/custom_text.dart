@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MeloUiText extends StatelessWidget {
-  const MeloUiText(this.text,
+class CustomText extends StatelessWidget {
+  const CustomText(this.text,
       {super.key, this.style = const TextStyle(), this.textAlign, this.color});
 
   final String text;

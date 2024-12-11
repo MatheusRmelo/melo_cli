@@ -12,6 +12,11 @@ class UserModel {
         name: json['name'] ?? '',
       );
 
+  factory UserModel.fromJsonForm(Map<String, String> json) => UserModel(
+        id: json['id'],
+        name: json['name'] ?? '',
+      );
+
   Map<String, dynamic> toJson() => {
         "name": name,
       };

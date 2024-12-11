@@ -85,6 +85,37 @@ class CliCommons {
         pluralName: '',
         singularName: '',
         stopIfExists: true);
+    //Table
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\meloui_table_widget.dart',
+        '$examplePath\\commons\\widgets\\meloui_table_widget.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true);
+    //Dialogs
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\dialogs\\meloui_delete_dialog_widget.dart',
+        '$examplePath\\commons\\widgets\\dialogs\\meloui_delete_dialog_widget.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true);
+    //Sidebar
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\sidebar\\meloui_nav_item.dart',
+        '$examplePath\\commons\\widgets\\sidebar\\meloui_nav_item.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true);
+    await CliHelper.copyFileFromExample(
+        '$path\\widgets\\sidebar\\meloui_sidebar.dart',
+        '$examplePath\\commons\\widgets\\sidebar\\meloui_sidebar.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true);
+    //Logo
+    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_logo.dart',
+        '$examplePath\\commons\\widgets\\meloui_logo.dart',
+        pluralName: '', singularName: '', stopIfExists: true);
   }
 
   Future<void> _createModels(String path) async {
@@ -101,8 +132,8 @@ class CliCommons {
         singularName: '',
         stopIfExists: true);
     await CliHelper.copyFileFromExample(
-        '$path\\models\\dynamic_form_model.dart',
-        '$examplePath\\commons\\models\\dynamic_form_model.dart',
+        '$path\\models\\dynamic_field_model.dart',
+        '$examplePath\\commons\\models\\dynamic_field_model.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
@@ -133,6 +164,12 @@ class CliCommons {
     await CliHelper.copyFileFromExample(
         '$path\\extensions\\context_extension.dart',
         '$examplePath\\commons\\extensions\\context_extension.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true);
+    await CliHelper.copyFileFromExample(
+        '$path\\extensions\\list_dynamic_field_extension.dart',
+        '$examplePath\\commons\\extensions\\list_dynamic_field_extension.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);

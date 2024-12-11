@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../meloui_text_field.dart';
+import '../custom_text_field.dart';
 
-class MeloUiDynamicTextField extends StatefulWidget {
-  const MeloUiDynamicTextField({
+class DynamicTextField extends StatefulWidget {
+  const DynamicTextField({
     super.key,
     required this.label,
     this.placeholder,
@@ -22,10 +22,10 @@ class MeloUiDynamicTextField extends StatefulWidget {
   final TextInputType keyboardType;
 
   @override
-  State<MeloUiDynamicTextField> createState() => _MeloUiDynamicTextFieldState();
+  State<DynamicTextField> createState() => _DynamicTextFieldState();
 }
 
-class _MeloUiDynamicTextFieldState extends State<MeloUiDynamicTextField> {
+class _DynamicTextFieldState extends State<DynamicTextField> {
   final TextEditingController _textInputController = TextEditingController();
 
   @override
@@ -45,7 +45,7 @@ class _MeloUiDynamicTextFieldState extends State<MeloUiDynamicTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return MeloUiTextField(
+    return CustomTextField(
       controller: _textInputController,
       placeholder: widget.placeholder,
       label: widget.label,

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'meloui_button.dart';
-import 'meloui_text.dart';
+import '../custom_button.dart';
+import '../custom_text.dart';
 
-class MeloUiDeleteDialogWidget extends StatelessWidget {
-  const MeloUiDeleteDialogWidget(
+class DeleteDialogWidget extends StatelessWidget {
+  const DeleteDialogWidget(
       {super.key,
       required this.title,
       required this.question,
@@ -33,7 +33,7 @@ class MeloUiDeleteDialogWidget extends StatelessWidget {
       content: SizedBox(
         width: 300,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          MeloUiText(
+          CustomText(
             title,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -41,7 +41,7 @@ class MeloUiDeleteDialogWidget extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          MeloUiText(
+          CustomText(
             question,
             textAlign: TextAlign.center,
             style: const TextStyle(fontSize: 16),
@@ -49,20 +49,20 @@ class MeloUiDeleteDialogWidget extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: MeloUiButton(
+                child: CustomButton(
                     title: 'Fechar',
                     onPressed: onClose ??
                         () {
                           Navigator.pop(context);
                         },
                     backgroundColor: Colors.red,
-                    variant: MeloUiButtonVariant.outlined),
+                    variant: CustomButtonVariant.outlined),
               ),
               SizedBox(
                 width: 16,
               ),
               Expanded(
-                child: MeloUiButton(
+                child: CustomButton(
                     title: buttonText,
                     icon: Icons.delete,
                     backgroundColor: Colors.red,

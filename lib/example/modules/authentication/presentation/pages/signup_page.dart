@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../commons/extensions/context_extension.dart';
-import '../../../../commons/widgets/meloui_card.dart';
-import '../../../../commons/widgets/meloui_snackbar.dart';
-import '../../../../commons/widgets/meloui_text_field.dart';
+import '../../../../commons/widgets/custom_card.dart';
+import '../../../../commons/widgets/custom_snackbar.dart';
+import '../../../../commons/widgets/custom_text_field.dart';
 
 import '../../../../commons/injection/injection_container.dart';
-import '../../../../commons/widgets/meloui_button.dart';
-import '../../../../commons/widgets/meloui_text.dart';
+import '../../../../commons/widgets/custom_button.dart';
+import '../../../../commons/widgets/custom_text.dart';
 import '../../../../commons/extensions/error_field_extension.dart';
 import '../manager/authentication/authentication_cubit.dart';
 
@@ -30,8 +30,8 @@ class _SignUpPageState extends State<SignUpPage> {
         bloc: _bloc,
         listener: (context, state) {
           if (state is AuthenticationError) {
-            ScaffoldMessenger.of(context).showSnackBar(MeloUiErrorSnackbar(
-                context: context, content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(
+                ErrorSnackbar(context: context, content: Text(state.message)));
           }
           if (state is AuthenticationSuccess) {
             Navigator.pushReplacementNamed(context, '/');
@@ -50,24 +50,24 @@ class _SignUpPageState extends State<SignUpPage> {
                         flex: 1,
                       ),
                     Expanded(
-                      child: MeloUiCard(
+                      child: CustomCard(
                         padding: EdgeInsets.all(context.isMobile ? 16 : 32),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const MeloUiText(
+                              const CustomText(
                                 "Crie sua conta no StoreList!",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
-                              const MeloUiText(
+                              const CustomText(
                                 "E faça sua lista de compras",
                                 style: TextStyle(fontSize: 20),
                               ),
                               const SizedBox(
                                 height: 16,
                               ),
-                              MeloUiTextField(
+                              CustomTextField(
                                 margin: EdgeInsets.zero,
                                 label: 'Nome',
                                 prefixIcon: const Icon(Icons.person),
@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              MeloUiTextField(
+                              CustomTextField(
                                 margin: EdgeInsets.zero,
                                 label: 'E-mail',
                                 prefixIcon: const Icon(Icons.email),
@@ -94,7 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               const SizedBox(
                                 height: 8,
                               ),
-                              MeloUiTextField(
+                              CustomTextField(
                                 margin: EdgeInsets.zero,
                                 prefixIcon: const Icon(Icons.lock),
                                 isPassword: true,
@@ -106,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ? state.errors.getErrorWithCode('password')
                                     : null,
                               ),
-                              MeloUiButton(
+                              CustomButton(
                                 margin: const EdgeInsets.only(top: 32),
                                 title: 'Criar conta',
                                 onPressed: () => _bloc.handleClickSignUp(

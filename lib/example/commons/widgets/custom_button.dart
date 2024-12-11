@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class MeloUiButton extends StatelessWidget {
-  const MeloUiButton(
+class CustomButton extends StatelessWidget {
+  const CustomButton(
       {super.key,
       this.isLoading = false,
       this.isDisabled = false,
@@ -11,7 +11,7 @@ class MeloUiButton extends StatelessWidget {
       this.icon,
       this.backgroundColor,
       this.textColor = Colors.white,
-      this.variant = MeloUiButtonVariant.solid,
+      this.variant = CustomButtonVariant.solid,
       required this.title,
       required this.onPressed});
   final bool isLoading;
@@ -23,7 +23,7 @@ class MeloUiButton extends StatelessWidget {
   final IconData? icon;
   final Color textColor;
   final Color? backgroundColor;
-  final MeloUiButtonVariant variant;
+  final CustomButtonVariant variant;
   final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MeloUiButton extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       margin: margin ?? const EdgeInsets.symmetric(vertical: 24),
-      child: variant == MeloUiButtonVariant.solid
+      child: variant == CustomButtonVariant.solid
           ? ElevatedButton(
               onPressed: isLoading || isDisabled ? null : onPressed,
               style: ElevatedButton.styleFrom(
@@ -128,4 +128,4 @@ class MeloUiButton extends StatelessWidget {
   }
 }
 
-enum MeloUiButtonVariant { solid, outlined }
+enum CustomButtonVariant { solid, outlined }

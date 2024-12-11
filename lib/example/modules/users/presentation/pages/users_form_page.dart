@@ -1,30 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../commons/extensions/list_dynamic_field_extension.dart';
 import '../../../../commons/injection/injection_container.dart';
-import '../../../../commons/widgets/meloui_button.dart';
-import '../../../../commons/widgets/meloui_snackbar.dart';
-import '../../../../commons/widgets/meloui_text.dart';
-import '../../../../commons/widgets/meloui_text_field.dart';
+import '../../../../commons/models/dynamic_field_model.dart';
+import '../../../../commons/widgets/custom_button.dart';
+import '../../../../commons/widgets/dynamic_form/dynamic_form_widget.dart';
+import '../../../../commons/widgets/custom_logo.dart';
+import '../../../../commons/widgets/sidebar/sidebar.dart';
+import '../../../../commons/widgets/custom_snackbar.dart';
+import '../../../../commons/widgets/custom_text.dart';
+
 import '../../domain/models/user_model.dart';
 import '../manager/users_form/users_form_cubit.dart';
 
 class UsersFormPage extends StatefulWidget {
-  const UsersFormPage({super.key, this.id, required this.activeDate});
+  const UsersFormPage({super.key, this.id});
   final String? id;
-  final DateTime activeDate;
+
   @override
   State<UsersFormPage> createState() => _UsersFormPageState();
 }
 
 class _UsersFormPageState extends State<UsersFormPage> {
   final _bloc = dependency.get<UsersFormCubit>();
-  final TextEditingController _nameController = TextEditingController();
+  List<DynamicFieldModel> _fields = [];
 
   @override
   void initState() {
     super.initState();
+    _fields = _bloc.getFields();
     if (widget.id == null) {
-      _nameController.clear();
+      _fields = _fields.clearFields();
     } else {
       _bloc.findById(widget.id!);
     }
@@ -41,60 +47,97 @@ class _UsersFormPageState extends State<UsersFormPage> {
             }
           }
           if (state is UsersFormError) {
-            ScaffoldMessenger.of(context).showSnackBar(MeloUiErrorSnackbar(
-                context: context, content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(
+                ErrorSnackbar(context: context, content: Text(state.message)));
           }
           if (state is UsersFormDetailSuccess) {
-            _nameController.text = state.data.name;
+            _fields = _fields.fromJson(state.data.toJson());
           }
         },
         builder: (context, state) {
-          if (state is UsersFormLoading) {
-            return Scaffold(
-                appBar: AppBar(
-                  title: MeloUiText(
-                      '${widget.id != null ? 'Editar' : 'Cadastrar'} lista de compra'),
-                  centerTitle: true,
-                ),
-                body: const Center(
-                  child: CircularProgressIndicator(),
-                ));
-          }
           return Scaffold(
-            appBar: AppBar(
-              title: MeloUiText(
-                  '${widget.id != null ? 'Editar' : 'Cadastrar'} lista de compra'),
-              centerTitle: true,
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const MeloUiText(
-                      'Selecione o dia (Opcional)',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    MeloUiTextField(
-                      label: 'Nome',
-                      placeholder: 'Digite o nome do orçamento',
-                      controller: _nameController,
-                    ),
-                    MeloUiButton(
-                        title:
-                            '${widget.id != null ? 'Editar' : 'Criar'} lista',
-                        isLoading: (state is UsersFormBusy),
-                        onPressed: () {
-                          _bloc.save(UserModel(
-                              name: _nameController.text, id: widget.id));
-                        })
-                  ],
+            body: Row(
+              children: [
+                const Sidebar(
+                  width: 300,
                 ),
-              ),
+                Expanded(
+                  child: state is UsersFormLoading
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 16, horizontal: 32),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        if (Navigator.canPop(context)) {
+                                          Navigator.pop(context);
+                                        } else {
+                                          Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/users',
+                                            (route) => false,
+                                          );
+                                        }
+                                      },
+                                      icon: const Icon(
+                                        Icons.arrow_back,
+                                        size: 32,
+                                      )),
+                                  const SizedBox(
+                                    width: 16,
+                                  ),
+                                  CustomText(
+                                    '${widget.id != null ? 'Editar' : 'Criar'} usuário',
+                                    style: const TextStyle(
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 24,
+                              ),
+                              Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      DynamicFormWidget(
+                                          onChangedField: (index, value) {
+                                            setState(() {
+                                              _fields[index].value =
+                                                  value.value;
+                                            });
+                                          },
+                                          fields: _fields),
+                                      CustomButton(
+                                          width: 200,
+                                          title:
+                                              '${widget.id != null ? 'Editar' : 'Criar'} categoria',
+                                          isLoading: (state is UsersFormBusy),
+                                          onPressed: () {
+                                            _bloc.save(
+                                                UserModel.fromJsonForm(
+                                                    _fields.toJson()),
+                                                id: widget.id);
+                                          })
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                ),
+              ],
             ),
           );
         });

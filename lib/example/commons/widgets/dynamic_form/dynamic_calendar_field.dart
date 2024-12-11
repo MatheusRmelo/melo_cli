@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../meloui_calendar_widget.dart';
+import '../calendar_widget.dart';
 
-class MeloUiDynamicCalendarField extends StatefulWidget {
-  const MeloUiDynamicCalendarField(
+class DynamicCalendarField extends StatefulWidget {
+  const DynamicCalendarField(
       {super.key,
       required this.label,
       required this.activeDate,
@@ -12,12 +12,10 @@ class MeloUiDynamicCalendarField extends StatefulWidget {
   final DateTime activeDate;
   final ValueChanged<DateTime?> onChanged;
   @override
-  State<MeloUiDynamicCalendarField> createState() =>
-      _MeloUiDynamicCalendarFieldState();
+  State<DynamicCalendarField> createState() => _DynamicCalendarFieldState();
 }
 
-class _MeloUiDynamicCalendarFieldState
-    extends State<MeloUiDynamicCalendarField> {
+class _DynamicCalendarFieldState extends State<DynamicCalendarField> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +27,7 @@ class _MeloUiDynamicCalendarFieldState
         const SizedBox(height: 8),
         SizedBox(
           height: 280,
-          child: MeloUiCalendarWidget(
+          child: CalendarWidget(
             activeDate: DateTime(widget.activeDate.year,
                 widget.activeDate.month, widget.activeDate.day),
             onChanged: (DateTime? date) {

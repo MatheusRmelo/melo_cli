@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-import '../../models/dynamic_form_model.dart';
+import '../../models/dynamic_field_model.dart';
 import '../../services/formatter_service.dart';
-import 'meloui_dynamic_calendar_field.dart';
-import 'meloui_dynamic_text_field.dart';
+import 'dynamic_calendar_field.dart';
+import 'dynamic_text_field.dart';
 
-class MeloUiDynamicFieldWidget extends StatefulWidget {
-  const MeloUiDynamicFieldWidget({
+class DynamicFieldWidget extends StatefulWidget {
+  const DynamicFieldWidget({
     super.key,
     required this.field,
     required this.onChange,
@@ -18,15 +18,14 @@ class MeloUiDynamicFieldWidget extends StatefulWidget {
   final ValueChanged<DynamicFieldModel?> onChange;
 
   @override
-  State<MeloUiDynamicFieldWidget> createState() =>
-      _MeloUiDynamicFieldWidgetState();
+  State<DynamicFieldWidget> createState() => _DynamicFieldWidgetState();
 }
 
-class _MeloUiDynamicFieldWidgetState extends State<MeloUiDynamicFieldWidget> {
+class _DynamicFieldWidgetState extends State<DynamicFieldWidget> {
   @override
   Widget build(BuildContext context) {
     if (widget.field.type == FieldType.text) {
-      return MeloUiDynamicTextField(
+      return DynamicTextField(
         value: widget.field.value,
         placeholder: widget.field.placeholder,
         label: widget.field.label,
@@ -38,7 +37,7 @@ class _MeloUiDynamicFieldWidgetState extends State<MeloUiDynamicFieldWidget> {
       );
     }
     if (widget.field.type == FieldType.real) {
-      return MeloUiDynamicTextField(
+      return DynamicTextField(
         value: widget.field.value,
         placeholder: widget.field.placeholder,
         label: widget.field.label,
@@ -55,7 +54,7 @@ class _MeloUiDynamicFieldWidgetState extends State<MeloUiDynamicFieldWidget> {
       );
     }
     if (widget.field.type == FieldType.day) {
-      return MeloUiDynamicCalendarField(
+      return DynamicCalendarField(
           label: widget.field.label,
           activeDate: widget.field.value == null
               ? DateTime.now()

@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 
-class DynamicFormModel {
-  String? name;
-  List<DynamicFieldModel> fields;
-
-  DynamicFormModel({this.name, required this.fields});
-}
-
 class DynamicFieldModel {
+  String code;
+
   String label;
   String? placeholder;
   FieldType type;
@@ -16,6 +11,7 @@ class DynamicFieldModel {
 
   DynamicFieldModel(
       {required this.label,
+      required this.code,
       this.placeholder,
       this.type = FieldType.text,
       this.value,
