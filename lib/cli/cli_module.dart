@@ -36,7 +36,7 @@ class CliModule {
   Future<void> _createData(String path, {bool repository = true}) async {
     await CliHelper.copyFileFromExample(
         '$path\\data\\data_sources\\${name}_remote_datasource.dart',
-        '$examplePath\\modules\\users\\data\\data_sources\\${datasourceType == DatasourceType.restApi ? 'api_' : ''}users_remote_datasource.dart',
+        '$examplePath\\modules\\users\\data\\data_sources\\${datasourceType.getName('users')}_remote_datasource.dart',
         pluralName: name,
         singularName: singularName);
     if (repository) {
@@ -136,6 +136,13 @@ class CliModule {
     await CliHelper.copyFileFromExample(
         '$path\\presentation\\widgets\\card_tile.dart',
         '$examplePath\\modules\\users\\presentation\\widgets\\card_tile.dart',
+        pluralName: name,
+        singularName: singularName);
+
+    //Routes
+    await CliHelper.copyFileFromExample(
+        '$path\\presentation\\routes\\${name}_routes.dart',
+        '$examplePath\\modules\\users\\presentation\\routes\\users_routes.dart',
         pluralName: name,
         singularName: singularName);
   }

@@ -13,11 +13,46 @@ class CliCore {
       required this.examplePath,
       required this.datasourceType});
 
-  Future<void> create() async {
+  Future<void> create({bool managers = false}) async {
     Directory('$appPath\\core').create(recursive: true).then((value) async {
-      await _createManager(value.path);
+      if (managers) {
+        await _createManager(value.path);
+      }
       await _createNetwork(value.path);
+      await _createNavigation(value.path);
     });
+  }
+
+  Future<void> _createNavigation(String path) async {
+    String parentPath = "navigation";
+    await CliHelper.copyFileFromExample(
+        '$path\\$parentPath\\domain\\mixins\\navigation_route.dart',
+        '$examplePath\\core\\$parentPath\\domain\\mixins\\navigation_route.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
+    await CliHelper.copyFileFromExample(
+        '$path\\$parentPath\\domain\\models\\route_model.dart',
+        '$examplePath\\core\\$parentPath\\domain\\models\\route_model.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
+    await CliHelper.copyFileFromExample(
+        '$path\\$parentPath\\manager\\navigation_cubit.dart',
+        '$examplePath\\core\\$parentPath\\manager\\navigation_cubit.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
+    await CliHelper.copyFileFromExample(
+        '$path\\$parentPath\\manager\\navigation_state.dart',
+        '$examplePath\\core\\$parentPath\\manager\\navigation_state.dart',
+        pluralName: '',
+        singularName: '',
+        stopIfExists: true,
+        isToReplaceNameInScript: false);
   }
 
   Future<void> _createManager(String path) async {

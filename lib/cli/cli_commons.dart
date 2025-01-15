@@ -29,92 +29,83 @@ class CliCommons {
   }
 
   Future<void> _createWidgets(String path) async {
-    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_text.dart',
-        '$examplePath\\commons\\widgets\\meloui_text.dart',
+    await CliHelper.copyFileFromExample('$path\\widgets\\custom_text.dart',
+        '$examplePath\\commons\\widgets\\custom_text.dart',
         pluralName: '', singularName: '', stopIfExists: true);
-    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_button.dart',
-        '$examplePath\\commons\\widgets\\meloui_button.dart',
+    await CliHelper.copyFileFromExample('$path\\widgets\\custom_button.dart',
+        '$examplePath\\commons\\widgets\\custom_button.dart',
         pluralName: '', singularName: '', stopIfExists: true);
-    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_card.dart',
-        '$examplePath\\commons\\widgets\\meloui_card.dart',
+    await CliHelper.copyFileFromExample('$path\\widgets\\custom_card.dart',
+        '$examplePath\\commons\\widgets\\custom_card.dart',
         pluralName: '', singularName: '', stopIfExists: true);
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_delete_dialog.dart',
-        '$examplePath\\commons\\widgets\\meloui_delete_dialog.dart',
+        '$path\\widgets\\dialogs\\delete_dialog_widget.dart',
+        '$examplePath\\commons\\widgets\\dialogs\\delete_dialog_widget.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
 
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_text_field.dart',
-        '$examplePath\\commons\\widgets\\meloui_text_field.dart',
+        '$path\\widgets\\custom_text_field.dart',
+        '$examplePath\\commons\\widgets\\custom_text_field.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
-    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_snackbar.dart',
-        '$examplePath\\commons\\widgets\\meloui_snackbar.dart',
+    await CliHelper.copyFileFromExample('$path\\widgets\\custom_snackbar.dart',
+        '$examplePath\\commons\\widgets\\custom_snackbar.dart',
         pluralName: '', singularName: '', stopIfExists: true);
-    await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_calendar_widget.dart',
-        '$examplePath\\commons\\widgets\\meloui_calendar_widget.dart',
-        pluralName: '',
-        singularName: '',
-        stopIfExists: true);
+    await CliHelper.copyFileFromExample('$path\\widgets\\calendar_widget.dart',
+        '$examplePath\\commons\\widgets\\calendar_widget.dart',
+        pluralName: '', singularName: '', stopIfExists: true);
     //Dynamic Form
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_dynamic_form\\meloui_dynamic_calendar_field.dart',
-        '$examplePath\\commons\\widgets\\meloui_dynamic_form\\meloui_dynamic_calendar_field.dart',
+        '$path\\widgets\\dynamic_form\\dynamic_calendar_field.dart',
+        '$examplePath\\commons\\widgets\\dynamic_form\\dynamic_calendar_field.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_dynamic_form\\meloui_dynamic_field_widget.dart',
-        '$examplePath\\commons\\widgets\\meloui_dynamic_form\\meloui_dynamic_field_widget.dart',
+        '$path\\widgets\\dynamic_form\\dynamic_field_widget.dart',
+        '$examplePath\\commons\\widgets\\dynamic_form\\dynamic_field_widget.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_dynamic_form\\meloui_dynamic_form_widget.dart',
-        '$examplePath\\commons\\widgets\\meloui_dynamic_form\\meloui_dynamic_form_widget.dart',
+        '$path\\widgets\\dynamic_form\\dynamic_form_widget.dart',
+        '$examplePath\\commons\\widgets\\dynamic_form\\dynamic_form_widget.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_dynamic_form\\meloui_dynamic_text_field.dart',
-        '$examplePath\\commons\\widgets\\meloui_dynamic_form\\meloui_dynamic_text_field.dart',
+        '$path\\widgets\\dynamic_form\\dynamic_text_field.dart',
+        '$examplePath\\commons\\widgets\\dynamic_form\\dynamic_text_field.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
     //Table
-    await CliHelper.copyFileFromExample(
-        '$path\\widgets\\meloui_table_widget.dart',
-        '$examplePath\\commons\\widgets\\meloui_table_widget.dart',
-        pluralName: '',
-        singularName: '',
-        stopIfExists: true);
+    await CliHelper.copyFileFromExample('$path\\widgets\\table_widget.dart',
+        '$examplePath\\commons\\widgets\\table_widget.dart',
+        pluralName: '', singularName: '', stopIfExists: true);
     //Dialogs
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\dialogs\\meloui_delete_dialog_widget.dart',
-        '$examplePath\\commons\\widgets\\dialogs\\meloui_delete_dialog_widget.dart',
+        '$path\\widgets\\dialogs\\delete_dialog_widget.dart',
+        '$examplePath\\commons\\widgets\\dialogs\\delete_dialog_widget.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
     //Sidebar
     await CliHelper.copyFileFromExample(
-        '$path\\widgets\\sidebar\\meloui_nav_item.dart',
-        '$examplePath\\commons\\widgets\\sidebar\\meloui_nav_item.dart',
+        '$path\\widgets\\sidebar\\sidebar_item.dart',
+        '$examplePath\\commons\\widgets\\sidebar\\sidebar_item.dart',
         pluralName: '',
         singularName: '',
         stopIfExists: true);
-    await CliHelper.copyFileFromExample(
-        '$path\\widgets\\sidebar\\meloui_sidebar.dart',
-        '$examplePath\\commons\\widgets\\sidebar\\meloui_sidebar.dart',
-        pluralName: '',
-        singularName: '',
-        stopIfExists: true);
+    await CliHelper.copyFileFromExample('$path\\widgets\\sidebar\\sidebar.dart',
+        '$examplePath\\commons\\widgets\\sidebar\\sidebar.dart',
+        pluralName: '', singularName: '', stopIfExists: true);
     //Logo
-    await CliHelper.copyFileFromExample('$path\\widgets\\meloui_logo.dart',
-        '$examplePath\\commons\\widgets\\meloui_logo.dart',
+    await CliHelper.copyFileFromExample('$path\\widgets\\custom_logo.dart',
+        '$examplePath\\commons\\widgets\\custom_logo.dart',
         pluralName: '', singularName: '', stopIfExists: true);
   }
 

@@ -1,9 +1,14 @@
 import 'dart:io';
 
+import 'package:melo_cli/cli/auth_make.dart';
 import 'package:melo_cli/cli/cli_core.dart';
-import 'package:melo_cli/cli_auth.dart';
+import 'package:melo_cli/cli/cli_auth.dart';
 import 'package:melo_cli/cli/cli_commons.dart';
-import 'package:melo_cli/cli_module.dart';
+import 'package:melo_cli/cli/cli_dashboard.dart';
+import 'package:melo_cli/cli/cli_module.dart';
+import 'package:melo_cli/cli/core_make.dart';
+import 'package:melo_cli/cli/module_make.dart';
+import 'package:melo_cli/cli/usecase_make.dart';
 import 'package:melo_cli/current_path_utils.dart';
 import 'package:melo_cli/enums/datasource_type.dart';
 import 'package:melo_cli/utils/inputs.dart';
@@ -15,24 +20,51 @@ void main(List<String> arguments) async {
   print('3 - Create a Core Folder');
   print('4 - Create a Commons Folder');
   print('5 - Create a Datasource');
+  print('6 - Create a Dashboard');
+  print('usecase:make - Create a UseCase');
+  print('module:make - Create a Module');
+  print('core:make - Create a Core Folder');
+  print('auth:make - Create a Authentication Module');
 
   final option = stdin.readLineSync();
-  if (int.tryParse(option ?? '') == null) {
-    print('Invalid Option!');
-    return;
-  }
 
   String? currentPath = "C:\\mooncake\\melo_cli";
   // if (currentPath == null) {
   //   print('Not possible find melo_cli package files');
   //   return;
   // }
-  int value = int.parse(option!);
   String examplePath = '$currentPath\\lib\\example\\';
   String appPath = "${Directory.current.path}\\lib\\features\\";
   String? pluralName;
   String? singularName;
   DatasourceType? datasourceType;
+
+  if (option == 'usecase:make') {
+    await UsecaseMake(appPath: appPath, examplePath: examplePath).start();
+    return;
+  }
+  if (option == 'module:make') {
+    await ModuleMake(examplePath: examplePath, appPath: appPath).start();
+    return;
+  }
+  if (option == 'core:make') {
+    await CoreMake(examplePath: examplePath, appPath: appPath).start();
+    return;
+  }
+  if (option == 'auth:make') {
+    await AuthMake(
+      examplePath: examplePath,
+      appPath: appPath,
+    ).start();
+    return;
+  }
+
+  int value = int.parse(option!);
+  if (int.tryParse(option) == null) {
+    print('Invalid Option!');
+    return;
+  }
+
   switch (value) {
     case 1:
       pluralName = Inputs.getModuleName();
@@ -162,6 +194,9 @@ void main(List<String> arguments) async {
               injection: false,
               presentation: false,
               repository: false);
+      break;
+    case 6:
+      CliDashboard.startFlow(appPath: appPath, examplePath: examplePath);
       break;
     default:
       print('Invalid Option!');

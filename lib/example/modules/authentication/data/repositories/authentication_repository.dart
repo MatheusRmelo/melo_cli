@@ -22,8 +22,9 @@ class AuthenticationRepository implements IAuthenticationRepository {
 
   @override
   Future<({Response response, bool result})> signUp(
-      String email, String password) async {
-    var response = await remoteDataSource.signUp(email, password);
+      String email, String password,
+      {String? name}) async {
+    var response = await remoteDataSource.signUp(email, password, name: name);
     return (
       response: (response.result ?? false)
           ? Success()

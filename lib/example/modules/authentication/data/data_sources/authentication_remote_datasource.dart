@@ -3,7 +3,8 @@ import '../../../../commons/models/response_model.dart';
 
 abstract class IAuthenticationRemoteDataSource {
   Future<ResponseModel<bool>> signIn(String email, String password);
-  Future<ResponseModel<bool>> signUp(String email, String password);
+  Future<ResponseModel<bool>> signUp(String email, String password,
+      {String? name});
 }
 
 class AuthenticationRemoteDataSource
@@ -22,7 +23,8 @@ class AuthenticationRemoteDataSource
   }
 
   @override
-  Future<ResponseModel<bool>> signUp(String email, String password) async {
+  Future<ResponseModel<bool>> signUp(String email, String password,
+      {String? name}) async {
     try {
       final AuthResponse res =
           await _supabase.auth.signUp(email: email, password: password);

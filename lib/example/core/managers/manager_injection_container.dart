@@ -1,4 +1,4 @@
-import '../../commons/injection/injection_adapter.dart';
+import '../adapters/injection_adapter.dart';
 import 'user_manager.dart';
 
 class ManagerInjectionContainer {

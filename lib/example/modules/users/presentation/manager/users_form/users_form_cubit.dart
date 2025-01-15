@@ -14,17 +14,16 @@ class UsersFormCubit extends Cubit<UsersFormState> {
   final DetailUserUsecase detailUserUsecase;
   final UpdateUserUsecase updateUserUsecase;
   final CreateUserUsecase createUserUsecase;
-  final ListUserDynamicFieldsUsecase listCategoryDynamicFieldsUsecase;
+  final ListUserDynamicFieldsUsecase listUserDynamicFieldsUsecase;
 
   UsersFormCubit(
       {required this.detailUserUsecase,
       required this.updateUserUsecase,
       required this.createUserUsecase,
-      required this.listCategoryDynamicFieldsUsecase})
+      required this.listUserDynamicFieldsUsecase})
       : super(UsersFormInitial());
 
-  List<DynamicFieldModel> getFields() =>
-      listCategoryDynamicFieldsUsecase.call();
+  List<DynamicFieldModel> getFields() => listUserDynamicFieldsUsecase.call();
 
   Future<void> findById(String id) async {
     emit(UsersFormLoading());

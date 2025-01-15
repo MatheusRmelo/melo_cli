@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:melo_cli/example/commons/injection/injection_container.dart';
-import 'package:melo_cli/example/core/navigation/manager/navigation_cubit.dart';
 
+import '../../../core/containers/injection_container.dart';
+import '../../../core/navigation/manager/navigation_cubit.dart';
 import '../custom_logo.dart';
 import 'sidebar_item.dart';
 

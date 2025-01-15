@@ -3,7 +3,8 @@ import '../../../../commons/models/response_model.dart';
 
 abstract class IAuthenticationRemoteDataSource {
   Future<ResponseModel<bool>> signIn(String email, String password);
-  Future<ResponseModel<bool>> signUp(String email, String password);
+  Future<ResponseModel<bool>> signUp(String email, String password,
+      {String? name});
 }
 
 class AuthenticationRemoteDataSource
@@ -24,7 +25,7 @@ class AuthenticationRemoteDataSource
 
   @override
   Future<ResponseModel<bool>> signUp(String email, String password,
-      {String name = ''}) async {
+      {String? name}) async {
     try {
       final ResponseModel res = await _client.post('$_path/register',
           {'name': name, 'email': email, 'password': password});

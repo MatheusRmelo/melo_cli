@@ -7,7 +7,7 @@ class SignUpUsecase {
   SignUpUsecase({required this.repository});
 
   Future<({String? error, List<ErrorFieldModel>? errorsFields})> call(
-      {required String email, required String password}) async {
+      {required String email, required String password, String? name}) async {
     List<ErrorFieldModel> errors = [];
     if (email.isEmpty) {
       errors.add(ErrorFieldModel(
@@ -20,7 +20,7 @@ class SignUpUsecase {
     if (errors.isNotEmpty) {
       return (error: null, errorsFields: errors);
     }
-    var result = await repository.signUp(email, password);
+    var result = await repository.signUp(email, password, name: name);
     if (result.response is Success) {
       return (error: null, errorsFields: null);
     } else if (result.response is ErrorResponse) {

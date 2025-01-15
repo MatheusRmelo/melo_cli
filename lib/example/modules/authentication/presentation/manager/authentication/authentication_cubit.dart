@@ -28,9 +28,10 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   Future<void> handleClickSignUp(
-      {required String email, required String password}) async {
+      {required String email, required String password, String? name}) async {
     emit(AuthenticationLoading());
-    var result = await signUpUsecase.call(email: email, password: password);
+    var result =
+        await signUpUsecase.call(name: name, email: email, password: password);
     if (result.error != null) {
       emit(AuthenticationError(result.error!));
     } else if (result.errorsFields != null) {

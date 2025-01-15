@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../commons/extensions/context_extension.dart';
 
-import '../../../../commons/injection/injection_container.dart';
 import '../../../../commons/widgets/dialogs/delete_dialog_widget.dart';
-import '../../../../commons/widgets/custom_logo.dart';
 import '../../../../commons/widgets/sidebar/sidebar.dart';
 import '../../../../commons/widgets/table_widget.dart';
+import '../../../../core/containers/injection_container.dart';
 import '../../domain/models/user_model.dart';
 import '../manager/users/users_cubit.dart';
 import '../widgets/card_tile.dart';
@@ -35,9 +35,9 @@ class _UsersPageState extends State<UsersPage> {
       builder: (context) => DeleteDialogWidget(
         title: 'Excluir usuário',
         question: 'Excluir o usuário ${user.name}, é uma ação irreversível',
-        onClose: () => Navigator.pop(context),
+        onClose: () => context.pop(context),
         onDelete: () {
-          Navigator.pop(context);
+          context.pop(context);
           _bloc.delete(user.id!);
         },
       ),
@@ -45,7 +45,8 @@ class _UsersPageState extends State<UsersPage> {
   }
 
   void _handleClickEdit(UserModel user) {
-    Navigator.pushNamed(context, '/users/edit/${user.id}').then((value) {
+    context
+        .pushNamed('edit-user', pathParameters: {'id': user.id!}).then((value) {
       if (value is bool && value == true) {
         _bloc.findAll();
       }
@@ -112,8 +113,8 @@ class _UsersPageState extends State<UsersPage> {
                                     title: 'Nova usuário',
                                     icon: Icons.add,
                                     onPressed: () {
-                                      Navigator.pushNamed(
-                                              context, '/users/create')
+                                      context
+                                          .pushNamed('create-user')
                                           .then((value) {
                                         if (value is bool && value == true) {
                                           _bloc.findAll();

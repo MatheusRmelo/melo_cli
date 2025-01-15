@@ -1,8 +1,8 @@
-import 'package:melo_cli/example/core/navigation/manager/navigation_cubit.dart';
-
 import '../../core/managers/manager_injection_container.dart';
+import '../../core/navigation/manager/navigation_cubit.dart';
 import '../../modules/users/injection_container/users_injection_container.dart';
-import 'injection_adapter.dart';
+import '../adapters/injection_adapter.dart';
+import '../managers/user_manager.dart';
 
 final dependency = InjectionAdapter();
 
@@ -12,8 +12,11 @@ Future<void> init() async {
   final UsersInjectionContainer usersInjectionContainer =
       UsersInjectionContainer();
 
-  dependency.registerFactory<NavigationCubit>(
+  dependency.registerLazySingleton<NavigationCubit>(
     () => NavigationCubit(),
+  );
+  dependency.registerLazySingleton<UserManager>(
+    () => UserManager(),
   );
 
   managerInjectionContainer(dependency);

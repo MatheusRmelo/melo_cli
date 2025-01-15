@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:melo_cli/string_extension.dart';
+import 'package:melo_cli/utils/formatters.dart';
 
 class CliHelper {
   static Future<void> copyFileFromExample(String result, String example,
@@ -18,10 +19,10 @@ class CliHelper {
     String contents = await exampleFile.readAsString();
     if (isToReplaceNameInScript) {
       var replace = {
-        'users'.capitalize(): pluralName.capitalize(),
-        'user'.capitalize(): singularName.capitalize(),
-        'users': pluralName,
-        'user': singularName,
+        'users'.capitalize(): pluralName,
+        'user'.capitalize(): singularName,
+        'users': Formatters.camelCaseToSnakeCase(pluralName),
+        'user': Formatters.camelCaseToSnakeCase(singularName),
       };
       for (var element in replace.entries) {
         contents = contents.replaceAll(element.key, element.value);

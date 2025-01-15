@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../commons/extensions/list_dynamic_field_extension.dart';
-import '../../../../commons/injection/injection_container.dart';
 import '../../../../commons/models/dynamic_field_model.dart';
 import '../../../../commons/widgets/custom_button.dart';
 import '../../../../commons/widgets/dynamic_form/dynamic_form_widget.dart';
-import '../../../../commons/widgets/custom_logo.dart';
 import '../../../../commons/widgets/sidebar/sidebar.dart';
 import '../../../../commons/widgets/custom_snackbar.dart';
 import '../../../../commons/widgets/custom_text.dart';
 
+import '../../../../core/containers/injection_container.dart';
 import '../../domain/models/user_model.dart';
 import '../manager/users_form/users_form_cubit.dart';
 
@@ -42,8 +42,8 @@ class _UsersFormPageState extends State<UsersFormPage> {
         bloc: _bloc,
         listener: (context, state) {
           if (state is UsersFormSuccess) {
-            if (Navigator.canPop(context)) {
-              Navigator.pop(context);
+            if (context.canPop()) {
+              context.pop(true);
             }
           }
           if (state is UsersFormError) {
@@ -76,14 +76,10 @@ class _UsersFormPageState extends State<UsersFormPage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {
-                                        if (Navigator.canPop(context)) {
-                                          Navigator.pop(context);
+                                        if (context.canPop()) {
+                                          context.pop();
                                         } else {
-                                          Navigator.pushNamedAndRemoveUntil(
-                                            context,
-                                            '/users',
-                                            (route) => false,
-                                          );
+                                          context.replaceNamed('get-users');
                                         }
                                       },
                                       icon: const Icon(
@@ -121,12 +117,12 @@ class _UsersFormPageState extends State<UsersFormPage> {
                                       CustomButton(
                                           width: 200,
                                           title:
-                                              '${widget.id != null ? 'Editar' : 'Criar'} categoria',
+                                              '${widget.id != null ? 'Editar' : 'Criar'} usuário',
                                           isLoading: (state is UsersFormBusy),
-                                          onPressed: () {
+                                          onPressed: () async {
                                             _bloc.save(
                                                 UserModel.fromJsonForm(
-                                                    _fields.toJson()),
+                                                    await _fields.toJson()),
                                                 id: widget.id);
                                           })
                                     ],

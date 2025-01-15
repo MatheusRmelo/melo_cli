@@ -5,10 +5,10 @@ import '../../../../commons/widgets/custom_card.dart';
 import '../../../../commons/widgets/custom_snackbar.dart';
 import '../../../../commons/widgets/custom_text_field.dart';
 
-import '../../../../commons/injection/injection_container.dart';
 import '../../../../commons/widgets/custom_button.dart';
 import '../../../../commons/widgets/custom_text.dart';
 import '../../../../commons/extensions/error_field_extension.dart';
+import '../../../../core/containers/injection_container.dart';
 import '../manager/authentication/authentication_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -39,9 +39,14 @@ class _SignUpPageState extends State<SignUpPage> {
         },
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              backgroundColor: context.isMobile ? Colors.white : null,
+              elevation: context.isMobile ? 0 : null,
+            ),
             body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
+              padding: context.isMobile
+                  ? EdgeInsets.zero
+                  : const EdgeInsets.symmetric(horizontal: 32, vertical: 0),
               child: SingleChildScrollView(
                 child: Row(
                   children: [
@@ -51,17 +56,17 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     Expanded(
                       child: CustomCard(
-                        padding: EdgeInsets.all(context.isMobile ? 16 : 32),
+                        padding: const EdgeInsets.all(32),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const CustomText(
-                                "Crie sua conta no StoreList!",
+                                "Crie sua conta!",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               const CustomText(
-                                "E faça sua lista de compras",
+                                "E aproveite",
                                 style: TextStyle(fontSize: 20),
                               ),
                               const SizedBox(
@@ -111,7 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 title: 'Criar conta',
                                 onPressed: () => _bloc.handleClickSignUp(
                                     email: _emailController.text,
-                                    password: _passwordController.text),
+                                    password: _passwordController.text,
+                                    name: _nameController.text),
                                 isLoading: state is AuthenticationLoading,
                               ),
                               Container(

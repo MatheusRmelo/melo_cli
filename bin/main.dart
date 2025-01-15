@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:melo_cli/cli_auth.dart';
+import 'package:melo_cli/cli/cli_auth.dart';
 import 'package:melo_cli/cli/cli_commons.dart';
-import 'package:melo_cli/cli_module.dart';
+import 'package:melo_cli/cli/cli_module.dart';
 import 'package:melo_cli/current_path_utils.dart';
 import 'package:melo_cli/enums/datasource_type.dart';
 

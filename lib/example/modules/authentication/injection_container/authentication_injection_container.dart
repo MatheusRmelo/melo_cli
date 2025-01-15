@@ -1,4 +1,4 @@
-import '../../../commons/injection/injection_adapter.dart';
+import '../../../core/adapters/injection_adapter.dart';
 import '../data/data_sources/authentication_remote_datasource.dart';
 import '../data/repositories/authentication_repository.dart';
 import '../domain/repositories/i_authentication_repository.dart';
@@ -19,13 +19,13 @@ class AuthenticationInjectionContainer {
     );
 
     dependency.registerFactory<SignInUsecase>(
-      () =>
-          SignInUsecase(repository: dependency.get<IAuthenticationRepository>()),
+      () => SignInUsecase(
+          repository: dependency.get<IAuthenticationRepository>()),
     );
 
     dependency.registerFactory<SignUpUsecase>(
-      () =>
-          SignUpUsecase(repository: dependency.get<IAuthenticationRepository>()),
+      () => SignUpUsecase(
+          repository: dependency.get<IAuthenticationRepository>()),
     );
 
     dependency.registerFactory<AuthenticationCubit>(

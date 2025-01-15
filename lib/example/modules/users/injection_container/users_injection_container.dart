@@ -1,4 +1,4 @@
-import '../../../commons/injection/injection_adapter.dart';
+import '../../../core/adapters/injection_adapter.dart';
 import '../data/data_sources/users_remote_datasource.dart';
 import '../data/repositories/users_repository.dart';
 import '../domain/repositories/i_users_repository.dart';
@@ -58,7 +58,7 @@ class UsersInjectionContainer {
           detailUserUsecase: dependency.get<DetailUserUsecase>(),
           updateUserUsecase: dependency.get<UpdateUserUsecase>(),
           createUserUsecase: dependency.get<CreateUserUsecase>(),
-          listCategoryDynamicFieldsUsecase:
+          listUserDynamicFieldsUsecase:
               dependency.get<ListUserDynamicFieldsUsecase>()),
     );
   }
