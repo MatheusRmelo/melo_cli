@@ -40,6 +40,19 @@ class _DynamicFieldWidgetState extends State<DynamicFieldWidget> {
         },
       );
     }
+    if (widget.field.type == FieldType.password) {
+      return DynamicTextField(
+        value: widget.field.value,
+        placeholder: widget.field.placeholder,
+        label: widget.field.label,
+        isPassword: true,
+        onChanged: (value) {
+          var field = widget.field;
+          field.value = value;
+          widget.onChange(field);
+        },
+      );
+    }
     if (widget.field.type == FieldType.real) {
       return DynamicTextField(
         value: widget.field.value,

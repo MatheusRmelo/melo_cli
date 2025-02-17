@@ -30,9 +30,9 @@ class CoreMake {
     }
 
     Directory('$appPath\\core').create(recursive: true).then((value) async {
-      if (managers) {
-        await _managers(value.path);
-      }
+      // if (managers) {
+      //   await _managers(value.path);
+      // }
       await _network(value.path);
       await _navigation(value.path);
       await _adapters(value.path);

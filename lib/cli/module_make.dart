@@ -5,6 +5,7 @@ import 'package:melo_cli/cli/commons_make.dart';
 import 'package:melo_cli/cli/core_make.dart';
 import 'package:melo_cli/cli_helper.dart';
 import 'package:melo_cli/enums/datasource_type.dart';
+import 'package:melo_cli/enums/module_type.dart';
 import 'package:melo_cli/extensions/list_create_file_extension.dart';
 import 'package:melo_cli/models/create_file_model.dart';
 import 'package:melo_cli/utils/formatters.dart';
@@ -18,12 +19,17 @@ class ModuleMake {
   DatasourceType? datasourceType;
   String folderModuleName = "";
   String folderSingularName = "";
+  ModuleType? moduleType;
+
+  bool get withForm =>
+      moduleType == ModuleType.full || moduleType == ModuleType.form;
 
   ModuleMake(
       {required this.examplePath,
       required this.appPath,
       this.module,
       this.singularModule,
+      this.moduleType,
       this.datasourceType});
 
   Future<void> start(
@@ -52,7 +58,14 @@ class ModuleMake {
     if (datasourceType == null) {
       datasourceType = DatasourceType.ask();
       if (datasourceType == null) {
-        print('Tipo não informado');
+        print('inválido datasource tipo');
+        return;
+      }
+    }
+    if (moduleType == null) {
+      moduleType = ModuleType.ask();
+      if (moduleType == null) {
+        print('Inválido módulo tipo');
         return;
       }
     }
@@ -119,31 +132,35 @@ class ModuleMake {
             "$basePath\\repositories\\i_${folderModuleName}_repository.dart",
         example: "$baseExample\\repositories\\i_users_repository.dart",
       ),
-      CreateFileModel(
-        result:
-            "$basePath\\use_cases\\create_${folderSingularName}_usecase.dart",
-        example: "$baseExample\\use_cases\\create_user_usecase.dart",
-      ),
-      CreateFileModel(
-        result:
-            "$basePath\\use_cases\\update_${folderSingularName}_usecase.dart",
-        example: "$baseExample\\use_cases\\update_user_usecase.dart",
-      ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\use_cases\\create_${folderSingularName}_usecase.dart",
+          example: "$baseExample\\use_cases\\create_user_usecase.dart",
+        ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\use_cases\\update_${folderSingularName}_usecase.dart",
+          example: "$baseExample\\use_cases\\update_user_usecase.dart",
+        ),
       CreateFileModel(
         result: "$basePath\\use_cases\\list_${folderSingularName}_usecase.dart",
         example: "$baseExample\\use_cases\\list_user_usecase.dart",
       ),
-      CreateFileModel(
-        result:
-            "$basePath\\use_cases\\detail_${folderSingularName}_usecase.dart",
-        example: "$baseExample\\use_cases\\detail_user_usecase.dart",
-      ),
-      CreateFileModel(
-        result:
-            "$basePath\\use_cases\\list_${folderSingularName}_dynamic_fields_usecase.dart",
-        example:
-            "$baseExample\\use_cases\\list_user_dynamic_fields_usecase.dart",
-      ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\use_cases\\detail_${folderSingularName}_usecase.dart",
+          example: "$baseExample\\use_cases\\detail_user_usecase.dart",
+        ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\use_cases\\list_${folderSingularName}_dynamic_fields_usecase.dart",
+          example:
+              "$baseExample\\use_cases\\list_user_dynamic_fields_usecase.dart",
+        ),
       CreateFileModel(
         result:
             "$basePath\\use_cases\\delete_${folderSingularName}_usecase.dart",
@@ -164,7 +181,8 @@ class ModuleMake {
     List<CreateFileModel> items = [
       CreateFileModel(
         result: "$basePath\\${folderModuleName}_injection_container.dart",
-        example: "$baseExample\\users_injection_container.dart",
+        example:
+            "$baseExample\\users${moduleType!.getName()}_injection_container.dart",
       ),
     ];
     for (var element in items) {
@@ -183,10 +201,11 @@ class ModuleMake {
         result: "$basePath\\pages\\${folderModuleName}_page.dart",
         example: "$baseExample\\pages\\users_page.dart",
       ),
-      CreateFileModel(
-        result: "$basePath\\pages\\${folderModuleName}_form_page.dart",
-        example: "$baseExample\\pages\\users_form_page.dart",
-      ),
+      if (withForm)
+        CreateFileModel(
+          result: "$basePath\\pages\\${folderModuleName}_form_page.dart",
+          example: "$baseExample\\pages\\users_form_page.dart",
+        ),
       CreateFileModel(
         result:
             "$basePath\\manager\\$folderModuleName\\${folderModuleName}_cubit.dart",
@@ -197,16 +216,18 @@ class ModuleMake {
             "$basePath\\manager\\$folderModuleName\\${folderModuleName}_state.dart",
         example: "$baseExample\\manager\\users\\users_state.dart",
       ),
-      CreateFileModel(
-        result:
-            "$basePath\\manager\\${folderModuleName}_form\\${folderModuleName}_form_cubit.dart",
-        example: "$baseExample\\manager\\users_form\\users_form_cubit.dart",
-      ),
-      CreateFileModel(
-        result:
-            "$basePath\\manager\\${folderModuleName}_form\\${folderModuleName}_form_state.dart",
-        example: "$baseExample\\manager\\users_form\\users_form_state.dart",
-      ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\manager\\${folderModuleName}_form\\${folderModuleName}_form_cubit.dart",
+          example: "$baseExample\\manager\\users_form\\users_form_cubit.dart",
+        ),
+      if (withForm)
+        CreateFileModel(
+          result:
+              "$basePath\\manager\\${folderModuleName}_form\\${folderModuleName}_form_state.dart",
+          example: "$baseExample\\manager\\users_form\\users_form_state.dart",
+        ),
       CreateFileModel(
         result: "$basePath\\widgets\\card_tile.dart",
         example: "$baseExample\\widgets\\card_tile.dart",
@@ -226,7 +247,8 @@ class ModuleMake {
     List<CreateFileModel> items = [
       CreateFileModel(
         result: "$basePath\\${folderModuleName}_router_container.dart",
-        example: "$baseExample\\users_router_container.dart",
+        example:
+            "$baseExample\\users${moduleType!.getName()}_router_container.dart",
       ),
     ];
     await items.create(plural: module!, singular: singularModule!);

@@ -24,9 +24,7 @@ class CommonsMake {
       bool services = true}) async {
     Directory('$appPath\\commons').create(recursive: true).then((value) async {
       if (models) await _createModels(value.path);
-      if (injection) {
-        await _createInjection(value.path);
-      }
+
       if (widgets) await _createWidgets(value.path);
       if (extensions) await _createExtensions(value.path);
       if (services) await _createServices(value.path);
@@ -162,42 +160,6 @@ class CommonsMake {
     for (var element in items) {
       await CliHelper.copyFileFromExample(element.result, element.example,
           pluralName: '', singularName: '', stopIfExists: true);
-    }
-  }
-
-  Future<void> _createInjection(String path) async {
-    if (pluralName == null) {
-      pluralName = Inputs.question('Qual o nome do módulo?');
-      if (pluralName == null) {
-        print('Módulo não informado');
-        return;
-      }
-    }
-    if (singularName == null) {
-      singularName = Inputs.question('Qual o nome do módulo no singular?');
-      if (singularName == null) {
-        print('Módulo singular não informado');
-        return;
-      }
-    }
-
-    String basePath = "$path\\injection";
-    String baseExample = "$examplePath\\commons\\injection";
-    List<CreateFileModel> items = [
-      CreateFileModel(
-        result: "$basePath\\injection_adapter.dart",
-        example: "$baseExample\\injection_adapter.dart",
-      ),
-      CreateFileModel(
-        result: "$basePath\\injection_container.dart",
-        example: "$baseExample\\injection_container.dart",
-      ),
-    ];
-    for (var element in items) {
-      await CliHelper.copyFileFromExample(element.result, element.example,
-          pluralName: pluralName!,
-          singularName: singularName!,
-          stopIfExists: true);
     }
   }
 

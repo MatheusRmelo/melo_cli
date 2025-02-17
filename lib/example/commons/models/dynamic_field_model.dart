@@ -36,5 +36,6 @@ enum FieldType {
   dropdown,
   textarea,
   image,
-  empty
+  empty,
+  password
 }

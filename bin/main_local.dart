@@ -8,6 +8,7 @@ import 'package:melo_cli/cli/cli_dashboard.dart';
 import 'package:melo_cli/cli/cli_module.dart';
 import 'package:melo_cli/cli/core_make.dart';
 import 'package:melo_cli/cli/module_make.dart';
+import 'package:melo_cli/cli/ui_make.dart';
 import 'package:melo_cli/cli/usecase_make.dart';
 import 'package:melo_cli/current_path_utils.dart';
 import 'package:melo_cli/enums/datasource_type.dart';
@@ -25,6 +26,7 @@ void main(List<String> arguments) async {
   print('module:make - Create a Module');
   print('core:make - Create a Core Folder');
   print('auth:make - Create a Authentication Module');
+  print('ui:make - Create a UI Component');
 
   final option = stdin.readLineSync();
 
@@ -49,6 +51,10 @@ void main(List<String> arguments) async {
   }
   if (option == 'core:make') {
     await CoreMake(examplePath: examplePath, appPath: appPath).start();
+    return;
+  }
+  if (option == 'ui:make') {
+    await UiMake(examplePath: examplePath, appPath: appPath).start();
     return;
   }
   if (option == 'auth:make') {

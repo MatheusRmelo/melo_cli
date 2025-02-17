@@ -12,6 +12,7 @@ class DynamicTextField extends StatefulWidget {
     this.formatters,
     this.keyboardType = TextInputType.text,
     required this.onChanged,
+    this.isPassword = false,
   });
 
   final String label;
@@ -20,6 +21,7 @@ class DynamicTextField extends StatefulWidget {
   final ValueChanged<String?> onChanged;
   final List<TextInputFormatter>? formatters;
   final TextInputType keyboardType;
+  final bool isPassword;
 
   @override
   State<DynamicTextField> createState() => _DynamicTextFieldState();
@@ -51,6 +53,7 @@ class _DynamicTextFieldState extends State<DynamicTextField> {
       label: widget.label,
       formatters: widget.formatters,
       keyboardType: widget.keyboardType,
+      isPassword: widget.isPassword,
     );
   }
 }
